@@ -3,55 +3,62 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class ProductPageIgna {
 
     public WebDriver driver;
+    public WebDriverWait wait;
+    public JavascriptExecutor js;
 
-    @Test
-    public void productsTest() {
-        driver = new ChromeDriver();
+    public  ProductPageIgna(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.js = (JavascriptExecutor) driver;
+    }
 
-        //dezactivam reclamele (de iframe ads)
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+    public void clickproduseElement() {
+        WebElement produse = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'magazin')]")));
+        produse.click();
+    }
 
-        //wait implicit (vegheaza asupra codului)
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void openmiereScortisoara() {
+        WebElement miere = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'miere-cu-scortisoara')]")));
+        js.executeScript("arguments[0].click();", miere);
+    }
 
-        driver.manage().window().maximize();
-        driver.get("https://stupinaigna.ro/");
+    public void addToCart() {
+        WebElement addBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.name("add-to-cart")));
+        js.executeScript("arguments[0].click();", addBtn);
+    }
 
-        // Click pe meniul 'Produse'
-        WebElement produseElement = driver.findElement(By.xpath("//a[contains(@href, 'magazin')]"));
-        WebDriverWait waitExplicit = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitExplicit.until(ExpectedConditions.alertIsPresent());
+    public void goBackToProductsPage() {
+        driver.navigate().back();
+    }
 
+    public void openfagureMunte() {
+        WebElement fagure = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'fagure-de-miere-munte')]")));
+        js.executeScript("arguments[0].click();", fagure);
+    }
 
-        // Click pe produs Miere cu Scortisoara
-        WebElement miereScortisoara = driver.findElement(By.xpath("//a[contains(@href, 'miere-cu-scortisoara')]"));
-        js.executeScript("arguments[0].click();", miereScortisoara);
+    public void clickVeziCos() {
+        WebElement veziCos = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'cart')]")));
+        js.executeScript("arguments[0].click();", veziCos);
+    }
 
-        // Click pe produs Fagure de Munte
-        WebElement fagureMunte = driver.findElement(By.xpath("//a[contains(@href, 'fagure-de-miere-munte')]"));
-        js.executeScript("arguments[0].click();", fagureMunte);
-
-        // Adauga in cos
-        WebElement addToCartButton = driver.findElement(By.name("add-to-cart"));
-        js.executeScript("arguments[0].click();", addToCartButton);
-
-        // Click pe Vezi Cos
-        WebElement clickVeziCos = driver.findElement(By.xpath("//a[contains(@href, 'cart')]"));
-        js.executeScript("arguments[0].click();", clickVeziCos);
-
-        // Sterge produs din Cos
-        WebElement stergeDinCos = driver.findElement(By.xpath("//a[contains(@href, 'remove')]"));
-        js.executeScript("arguments[0].click();", stergeDinCos);
+    public void clickstergeDinCos() {
+        WebElement remove = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href, 'remove')]")));
+        js.executeScript("arguments[0].click();", remove);
     }
 }
+
 
 

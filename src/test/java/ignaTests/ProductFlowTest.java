@@ -13,24 +13,24 @@ public class ProductFlowTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        // Home page
         HomePageIgna homePage = new HomePageIgna(driver);
         homePage.goToHomePage();
 
-        // Produse
         ProductPageIgna productPage = new ProductPageIgna(driver);
-        productPage.clickproduseElement();
-        productPage.openmiereScortisoara();
+
+        productPage.clickProduse();
+        productPage.openFagureMunte();
         productPage.addToCart();
-        productPage.goBackToProductsPage();
-        productPage.openfagureMunte();
+
+        productPage.returnToHomePage();
+
+        productPage.openMiereScortisoara();
         productPage.addToCart();
+
         productPage.clickVeziCos();
-        productPage.clickstergeDinCos();
+        productPage.clickRemoveProduct();
 
-        // închide sesiunea
         driver.quit();
-
     }
 }
 

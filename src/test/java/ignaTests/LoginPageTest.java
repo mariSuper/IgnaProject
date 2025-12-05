@@ -7,25 +7,21 @@ import org.testng.annotations.Test;
 
 public class LoginPageTest {
 
-    public WebDriver driver;
-
     @Test
-    public void LoginTest() {
-        driver = new ChromeDriver();
+    public void loginTest() {
+
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        // Home page
         HomePageIgna home = new HomePageIgna(driver);
         home.goToHomePage();
-        // home.closeCookiesIfPresent();
         home.clickContulMeu();
 
-        //Login page
         LoginPageIgna login = new LoginPageIgna(driver);
         login.enterEmail();
         login.enterPassword();
-        login.rememberElement();
-        login.loginButton();
+        login.clickRememberMe();
+        login.clickLoginButton();
 
         driver.quit();
     }

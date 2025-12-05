@@ -1,61 +1,39 @@
 package ignaPages;
+import methodsIgna.ElementsMethod;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePageIgna {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
+    private WebDriver driver;
+    private ElementsMethod elementsMethod;
 
     public HomePageIgna(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
     }
+
+    @FindBy(xpath = "//a[text()='Acasă']")
+    private WebElement butonAcasa;
+
+    @FindBy(xpath = "//a[text()='Contul meu']")
+    private WebElement contulMeu;
 
     public void goToHomePage() {
         driver.get("https://stupinaigna.ro/");
     }
-//    public void closeCookiesIfPresent() {
-//        try {
-//            WebElement cookiesBtn = wait.until(
-//                    ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Accept')]")));
-//            cookiesBtn.click();
-//        } catch (Exception e) {
-//            // dacă nu apare, mergem mai departe
-//            System.out.println("Cookies popup not displayed.");
-//        }
-//    }
-    public void acceptCookies() {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement acceptBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//a[contains(text(),'Accept')]")));
-            acceptBtn.click();
-            System.out.println("Cookies popup accepted.");
-        } catch (Exception e) {
-            System.out.println("Cookies popup not displayed.");
-        }
-    }
 
     public void clickAcasa() {
-        WebElement acasaElement = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//a[@href='/']")));
-        acasaElement.click();
+        elementsMethod.click(butonAcasa);
     }
 
     public void clickContulMeu() {
-        WebElement contElement = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//a[contains(@href, 'contul-meu')]")));
-
-        // Click normal sau fallback JS dacă e blocat
         try {
-            contElement.click();
+            elementsMethod.click(contulMeu);
         } catch (Exception e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", contElement);
+            elementsMethod.javaScriptClick(contulMeu);
         }
     }
 }

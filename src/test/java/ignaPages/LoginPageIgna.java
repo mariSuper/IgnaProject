@@ -1,37 +1,50 @@
 package ignaPages;
-import org.openqa.selenium.By;
+import methodsIgna.ElementsMethod;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPageIgna {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
+    private WebDriver driver;
+    private ElementsMethod elementsMethod;
 
     public LoginPageIgna(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
     }
 
+    @FindBy(id = "username")
+    private WebElement emailInput;
+
+    @FindBy(id = "password")
+    private WebElement passwordInput;
+
+    @FindBy(id = "rememberme")
+    private WebElement rememberMe;
+
+    @FindBy(name = "login")
+    private WebElement loginButton;
+
     public void enterEmail() {
-        driver.findElement(By.id("username"))
-                .sendKeys("gabimari2022art@gmail.com");
+        elementsMethod.fill(emailInput, "gabimari2022art@gmail.com");
     }
 
     public void enterPassword() {
-        driver.findElement(By.id("password"))
-                .sendKeys("Indexare1!");
+        elementsMethod.fill(passwordInput, "Indexare1!");
     }
 
-    public void rememberElement() {
-        driver.findElement(By.name("rememberme"))
-                .click();
+    public void clickRememberMe() {
+        elementsMethod.click(rememberMe);
     }
 
-    public void loginButton() {
-        driver.findElement(By.xpath("//button[contains(text()," +
-                        " 'Autentificare')]"))
-                .click();
+    public void clickLoginButton() {
+        try {
+            elementsMethod.click(loginButton);
+        } catch (Exception e) {
+            elementsMethod.javaScriptClick(loginButton);
+        }
     }
 }

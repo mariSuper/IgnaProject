@@ -1,62 +1,84 @@
 package ignaPages;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import methodsIgna.ElementsMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ProductPageIgna {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
-    public JavascriptExecutor js;
+    private WebDriver driver;
+    private ElementsMethod elementsMethod;
 
-    public  ProductPageIgna(WebDriver driver) {
+    public ProductPageIgna(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.js = (JavascriptExecutor) driver;
+        this.elementsMethod = new ElementsMethod(driver);
+        PageFactory.initElements(driver, this);
     }
 
-    public void clickproduseElement() {
-        WebElement produse = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href, 'magazin')]")));
-        produse.click();
+    // Buton Meniu "PRODUSE"
+    @FindBy(xpath = "//a[contains(@href, 'magazin')]")
+    private WebElement butonProduse;
+
+    // Produs în interiorul PRODUSE: Fagure Munte
+    @FindBy(xpath = "//a[contains(@href, 'fagure-de-miere-munte')]")
+    private WebElement produsFagureMunte;
+
+    // Produs pe homepage: Miere cu scorțișoară
+    @FindBy(xpath = "//a[contains(@href, 'miere-cu-scortisoara')]")
+    private WebElement produsMiereScortisoara;
+
+    // Buton "Adaugă în coș"
+    @FindBy(name = "add-to-cart")
+    private WebElement butonAddToCart;
+
+    // Buton Vezi coș
+    @FindBy(xpath = "//a[contains(@href, 'cart')]")
+    private WebElement butonVeziCos;
+
+    // Buton Remove Product
+    @FindBy(xpath = "//a[contains(@href, 'remove')]")
+    private WebElement butonRemove;
+
+    // Metode
+    public void clickProduse() {
+        elementsMethod.click(butonProduse);
     }
 
-    public void openmiereScortisoara() {
-        WebElement miere = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href, 'miere-cu-scortisoara')]")));
-        js.executeScript("arguments[0].click();", miere);
+    public void openFagureMunte() {
+        try {
+            elementsMethod.click(produsFagureMunte);
+        } catch (Exception e) {
+            elementsMethod.javaScriptClick(produsFagureMunte);
+        }
     }
 
     public void addToCart() {
-        WebElement addBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.name("add-to-cart")));
-        js.executeScript("arguments[0].click();", addBtn);
+        try {
+            elementsMethod.click(butonAddToCart);
+        } catch (Exception e) {
+            elementsMethod.javaScriptClick(butonAddToCart);
+        }
     }
 
-    public void goBackToProductsPage() {
+    public void returnToHomePage() {
         driver.navigate().back();
     }
 
-    public void openfagureMunte() {
-        WebElement fagure = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href, 'fagure-de-miere-munte')]")));
-        js.executeScript("arguments[0].click();", fagure);
+    public void openMiereScortisoara() {
+        try {
+            elementsMethod.click(produsMiereScortisoara);
+        } catch (Exception e) {
+            elementsMethod.javaScriptClick(produsMiereScortisoara);
+        }
     }
 
     public void clickVeziCos() {
-        WebElement veziCos = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href, 'cart')]")));
-        js.executeScript("arguments[0].click();", veziCos);
+        elementsMethod.javaScriptClick(butonVeziCos);
     }
 
-    public void clickstergeDinCos() {
-        WebElement remove = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href, 'remove')]")));
-        js.executeScript("arguments[0].click();", remove);
+    public void clickRemoveProduct() {
+        elementsMethod.javaScriptClick(butonRemove);
     }
 }
 

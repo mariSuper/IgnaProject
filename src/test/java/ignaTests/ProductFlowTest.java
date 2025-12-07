@@ -1,6 +1,5 @@
 package ignaTests;
 import ignaHooks.Hooks;
-import ignaPages.HomePageIgna;
 import ignaPages.ProductPageIgna;
 import org.testng.annotations.Test;
 
@@ -8,22 +7,19 @@ public class ProductFlowTest extends Hooks {
 
     @Test
     public void productFlowTest() {
+        ProductPageIgna product = new ProductPageIgna(driver);
 
-        HomePageIgna homePage = new HomePageIgna(driver);
+        product.clickProduse();
+        product.openFagureMunte();
+        product.addToCart();
 
-        ProductPageIgna productPage = new ProductPageIgna(driver);
+        driver.navigate().back();
 
-        productPage.clickProduse();
-        productPage.openFagureMunte();
-        productPage.addToCart();
+        product.openMiereScortisoara();
+        product.addToCart();
 
-        productPage.returnToHomePage();
-
-        productPage.openMiereScortisoara();
-        productPage.addToCart();
-
-        productPage.clickVeziCos();
-        productPage.clickRemoveProduct();
+        product.clickVeziCos();
+        product.clickRemoveProduct();
     }
 }
 

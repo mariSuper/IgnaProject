@@ -1,5 +1,7 @@
 package ignaPages;
+import ignaUtils.LoggerUtil;
 import methodsIgna.ElementsMethod;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +11,7 @@ public class ProductPageIgna {
 
     private WebDriver driver;
     private ElementsMethod elementsMethod;
+    private Logger logger = LoggerUtil.getLogger(ProductPageIgna.class);
 
     public ProductPageIgna(WebDriver driver) {
         this.driver = driver;
@@ -42,30 +45,37 @@ public class ProductPageIgna {
 
     // Metode
     public void clickProduse() {
+        logger.info("Deschid meniul PRODUSE");
         elementsMethod.click(butonProduse);
     }
 
     public void openFagureMunte() {
+        logger.info("Deschid produsul Fagure Munte");
         elementsMethod.javaScriptClick(produsFagureMunte);
     }
 
     public void addToCart() {
+        logger.info("Adaug produsul în coș");
         elementsMethod.javaScriptClick(butonAddToCart);
     }
 
     public void returnToHomePage() {
+        logger.info("Return to Home Page");
         driver.navigate().back();
     }
 
     public void openMiereScortisoara() {
+        logger.info("Deschid Miere cu Scortisoara");
             elementsMethod.javaScriptClick(produsMiereScortisoara);
     }
 
     public void clickVeziCos() {
+        logger.info("Deschid coșul");
         elementsMethod.javaScriptClick(butonVeziCos);
     }
 
     public void clickRemoveProduct() {
+        logger.info("Șterg produsul din coș");
         elementsMethod.javaScriptClick(butonRemove);
     }
 }

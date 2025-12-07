@@ -1,5 +1,7 @@
 package ignaPages;
+import ignaUtils.LoggerUtil;
 import methodsIgna.ElementsMethod;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,6 +10,7 @@ public class HomePageIgna {
 
     private WebDriver driver;
     private ElementsMethod elementsMethod;
+    private Logger logger = LoggerUtil.getLogger(HomePageIgna.class);
 
     public HomePageIgna(WebDriver driver) {
         this.driver = driver;
@@ -26,10 +29,8 @@ public class HomePageIgna {
     }
 
     public void clickContulMeu() {
-        try {
-            elementsMethod.click(contulMeu);
-        } catch (Exception e) {
-            elementsMethod.javaScriptClick(contulMeu);
+        logger.info("Deschid pagina de login");
+        elementsMethod.click(contulMeu);
         }
     }
-}
+

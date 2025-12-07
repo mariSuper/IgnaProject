@@ -1,5 +1,7 @@
 package ignaPages;
+import ignaUtils.LoggerUtil;
 import methodsIgna.ElementsMethod;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +11,7 @@ public class LoginPageIgna {
 
     private WebDriver driver;
     private ElementsMethod elementsMethod;
+    private Logger logger = LoggerUtil.getLogger(LoginPageIgna.class);
 
     public LoginPageIgna(WebDriver driver) {
         this.driver = driver;
@@ -28,23 +31,19 @@ public class LoginPageIgna {
     @FindBy(name = "login")
     private WebElement loginButton;
 
-    // Metodă de completare email
-    public void typeEmail(String email) {
+    // Login to Account
+    public void loginToAccount(String email, String pass) {
+        logger.info("Introduc emailul");
         elementsMethod.fill(emailInput, email);
-    }
 
-    // Metodă de completare parola
-    public void typePassword(String password) {
-        elementsMethod.fill(passwordInput, password);
-    }
+        logger.info("Introduc parola");
+        elementsMethod.fill(passwordInput, pass);
 
-    // Metodă click Remember Me
-    public void clickRememberMe() {
-        elementsMethod.javaScriptClick(rememberMe);
-    }
+        logger.info("Bifez Remember Me");
+        elementsMethod.click(rememberMe);
 
-    // Metodă click Login
-    public void clickLoginButton() {
+        logger.info("Apas Login");
         elementsMethod.click(loginButton);
+
     }
 }

@@ -1,5 +1,7 @@
 package ignaPages;
+import ignaUtils.LoggerUtil;
 import methodsIgna.ElementsMethod;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +11,7 @@ public class CookiesPage {
 
     private WebDriver driver;
     private ElementsMethod elementsMethod;
+    private Logger logger = LoggerUtil.getLogger(CookiesPage.class);
 
     public CookiesPage(WebDriver driver) {
         this.driver = driver;
@@ -26,7 +29,7 @@ public class CookiesPage {
             elementsMethod.javaScriptClick(acceptCookiesButton);
             System.out.println("Cookies acceptate.");
         } catch (Exception e) {
-            System.out.println("Banner cookies nu este prezent.");
+            System.out.println("Nu apare bannerul de cookies.");
         }
     }
 }

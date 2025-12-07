@@ -21,10 +21,6 @@ public class HomePageIgna {
     @FindBy(xpath = "//a[text()='Contul meu']")
     private WebElement contulMeu;
 
-    public void goToHomePage() {
-        driver.get("https://stupinaigna.ro/");
-    }
-
     public void clickAcasa() {
         elementsMethod.click(butonAcasa);
     }

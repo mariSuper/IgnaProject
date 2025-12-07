@@ -28,23 +28,23 @@ public class LoginPageIgna {
     @FindBy(name = "login")
     private WebElement loginButton;
 
-    public void enterEmail() {
-        elementsMethod.fill(emailInput, "gabimari2022art@gmail.com");
+    // Metodă de completare email
+    public void typeEmail(String email) {
+        elementsMethod.fill(emailInput, email);
     }
 
-    public void enterPassword() {
-        elementsMethod.fill(passwordInput, "Indexare1!");
+    // Metodă de completare parola
+    public void typePassword(String password) {
+        elementsMethod.fill(passwordInput, password);
     }
 
+    // Metodă click Remember Me
     public void clickRememberMe() {
-        elementsMethod.click(rememberMe);
+        elementsMethod.javaScriptClick(rememberMe);
     }
 
+    // Metodă click Login
     public void clickLoginButton() {
-        try {
-            elementsMethod.click(loginButton);
-        } catch (Exception e) {
-            elementsMethod.javaScriptClick(loginButton);
-        }
+        elementsMethod.click(loginButton);
     }
 }

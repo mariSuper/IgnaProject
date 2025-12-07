@@ -46,19 +46,11 @@ public class ProductPageIgna {
     }
 
     public void openFagureMunte() {
-        try {
-            elementsMethod.click(produsFagureMunte);
-        } catch (Exception e) {
-            elementsMethod.javaScriptClick(produsFagureMunte);
-        }
+        elementsMethod.javaScriptClick(produsFagureMunte);
     }
 
     public void addToCart() {
-        try {
-            elementsMethod.click(butonAddToCart);
-        } catch (Exception e) {
-            elementsMethod.javaScriptClick(butonAddToCart);
-        }
+        elementsMethod.javaScriptClick(butonAddToCart);
     }
 
     public void returnToHomePage() {
@@ -66,11 +58,7 @@ public class ProductPageIgna {
     }
 
     public void openMiereScortisoara() {
-        try {
-            elementsMethod.click(produsMiereScortisoara);
-        } catch (Exception e) {
             elementsMethod.javaScriptClick(produsMiereScortisoara);
-        }
     }
 
     public void clickVeziCos() {

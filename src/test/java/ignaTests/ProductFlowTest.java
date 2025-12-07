@@ -1,20 +1,15 @@
 package ignaTests;
+import ignaHooks.Hooks;
 import ignaPages.HomePageIgna;
 import ignaPages.ProductPageIgna;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-public class ProductFlowTest {
+public class ProductFlowTest extends Hooks {
 
     @Test
     public void productFlowTest() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
         HomePageIgna homePage = new HomePageIgna(driver);
-        homePage.goToHomePage();
 
         ProductPageIgna productPage = new ProductPageIgna(driver);
 
@@ -29,9 +24,6 @@ public class ProductFlowTest {
 
         productPage.clickVeziCos();
         productPage.clickRemoveProduct();
-
-        driver.quit();
     }
 }
-
 
